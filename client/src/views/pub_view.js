@@ -12,8 +12,11 @@ PubView.prototype.renderSelect = function(pubData) {
   });
 };
 
-PubView.prototype.renderDetail = function() {
-
+PubView.prototype.renderDetail = function(pub) {
+  this.pubContainer.innerHTML = "";
+  const pubDetail = document.createElement('p');
+  pubDetail.textContent = pub.fart_type;
+  this.pubContainer.appendChild(pubDetail);
 };
 
 module.exports = PubView;

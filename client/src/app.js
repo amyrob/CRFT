@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
   pubSelect.addEventListener('change', (evt) => {
     const selectedIndex = evt.target.value;
     const selectedPub = pubData.data[selectedIndex];
-    pubContainer.renderDetail(selectedPub);
+    pubView.renderDetail(selectedPub);
   });
 
   pubData.getData((data) => {
