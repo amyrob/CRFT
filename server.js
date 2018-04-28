@@ -48,7 +48,7 @@ MongoClient.connect('mongodb://localhost:27017', function (err, client) {
     const newPub = req.body;
 
     pubsCollection.save(newPub, function (err, result) {
-      if(err) {
+      if (err) {
         console.error(err);
         res.status(500);
         res.send();
@@ -103,8 +103,9 @@ MongoClient.connect('mongodb://localhost:27017', function (err, client) {
       res.send();
     });
   });
-});
 
-server.listen(3000, function(){
-  console.log("Listening on port 3000");
+  server.listen(3000, function(){
+    console.log("Listening on port 3000");
+  });
+
 });
