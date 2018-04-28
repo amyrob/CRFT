@@ -17,7 +17,7 @@ MongoClient.connect('mongodb://localhost:27017', function (err, client) {
   console.log('Connected to *CRFT*');
   const pubsCollection = db.collection('pubs');
 
-//INDEX ROUTE
+  //INDEX ROUTE
   server.get('/crft/admin', function(req, res) {
     pubsCollection.find().toArray(function(err, allPubs){
       if (err){
@@ -29,7 +29,7 @@ MongoClient.connect('mongodb://localhost:27017', function (err, client) {
     });
   });
 
-//SHOW ROUTE
+  //SHOW ROUTE
   server.get('/crft/admin/:id', function(req, res){
     const id = req.params.id;
     const objectID = ObjectID(id);
@@ -40,10 +40,10 @@ MongoClient.connect('mongodb://localhost:27017', function (err, client) {
         res.send();
       };
       res.send(result);
-    })
-  })
+    });
+  });
 
-//CREATE ROUTE
+  //CREATE ROUTE
   server.post('/crft/admin', function(req, res) {
     const newPub = req.body;
 
@@ -59,7 +59,7 @@ MongoClient.connect('mongodb://localhost:27017', function (err, client) {
     });
   });
 
-//UPDATE ROUTE
+  //UPDATE ROUTE
   server.put('crft/admin/:id', function(req, res){
     const updatedPub = req.body;
 
@@ -77,7 +77,7 @@ MongoClient.connect('mongodb://localhost:27017', function (err, client) {
 
   });
 
-//DESTROY ALL ROUTE
+  //DESTROY ALL ROUTE
   server.delete('/crft/admin', function(req, res){
     pubsCollection.deleteMany({}, function(err, result){
       if(err) {
@@ -101,12 +101,10 @@ MongoClient.connect('mongodb://localhost:27017', function (err, client) {
       };
       res.status(204);
       res.send();
-    })
-  })
-
-
-
-  server.listen(3000, function(){
-    console.log("Listening on port 3000");
+    });
   });
+});
+
+server.listen(3000, function(){
+  console.log("Listening on port 3000");
 });
