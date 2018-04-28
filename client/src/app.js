@@ -3,7 +3,6 @@ const PubData = require('./models/pub_data.js');
 const Request = require('./services/request.js');
 const MapWrapper = require('./views/map_wrapper.js');
 
-const pubView = new PubView();
 const request = new Request('http://localhost:3000/');
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -15,6 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const pubSelect = document.querySelector('#pub-select');
   const pubContainer = document.querySelector('#pub-list-container');
+  const pubView = new PubView(pubSelect, pubContainer);
 
   const pubData = new PubData('http://localhost:3000/crft/admin');
 
