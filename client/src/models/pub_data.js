@@ -1,1 +1,2 @@
-// a
+
+module.exports = PubData;

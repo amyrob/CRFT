@@ -60,12 +60,12 @@ MongoClient.connect('mongodb://localhost:27017', function (err, client) {
   });
 
   //UPDATE ROUTE
-  server.put('crft/admin/:id', function(req, res){
+  server.put('/crft/admin/:id', function(req, res){
     const updatedPub = req.body;
 
     const id = req.params.id;
     const objectID = ObjectID(id);
-    pubsCollection.update({_id:objectID}, updatedPub, function(err, result){
+    pubsCollection.update({_id: objectID}, updatedPub, function(err, result){
       if(err) {
         console.error(err);
         res.status(500);
@@ -93,7 +93,7 @@ MongoClient.connect('mongodb://localhost:27017', function (err, client) {
   server.delete('/crft/admin/:id', function(req, res){
     const id = req.params.id;
     const objectID = ObjectID(id);
-    pubsCollection.deleteOne({_id:objectID}, function(err, result){
+    pubsCollection.deleteOne({_id: objectID}, function(err, result){
       if(err) {
         console.error(err);
         res.status(500);
