@@ -11,7 +11,8 @@ const MapWrapper = function (container, center, zoomLevel) {
 MapWrapper.prototype.addMarker = function (coords) {
   const marker = new google.maps.Marker({
     map: this.googleMap,
-    position: coords
+    position: coords,
+    animation: google.maps.Animation.DROP
   });
   this.markers.push(marker);
 };

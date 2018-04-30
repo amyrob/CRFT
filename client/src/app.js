@@ -16,7 +16,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const pubContainer = document.querySelector('#pub-list-container');
   const pubView = new PubView(pubSelect, pubContainer);
 
-  const pubData = new PubData('http://localhost:3000/crft/admin');
+  const pubData = new PubData('http://localhost:3000/crft/');
+
+
 
   pubSelect.addEventListener('change', (evt) => {
     const selectedIndex = evt.target.value;
@@ -26,6 +28,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
   pubData.getData((data) => {
     pubView.renderSelect(data);
+    data.forEach((pub) => {
+      map.addMarker(pubView.getLatLng(pub));
+    });
   });
+
 
 });
