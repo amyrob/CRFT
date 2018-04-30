@@ -1,6 +1,7 @@
-const PubView = function(pubSelect, pubContainer) {
+const PubView = function(pubSelect, pubDetailContainer, pubListContainer) {
   this.pubSelect = pubSelect;
-  this.pubContainer = pubContainer;
+  this.pubContainer = pubDetailContainer;
+  this.pubListContainer = pubListContainer;
 };
 
 PubView.prototype.renderSelect = function(pubData) {
@@ -10,6 +11,16 @@ PubView.prototype.renderSelect = function(pubData) {
     pubOption.value = index;
     this.pubSelect.appendChild(pubOption);
   });
+};
+
+PubView.prototype.renderList = function(pubData) {
+  const pubList = document.createElement('ul');
+  pubData.forEach((pub) => {
+    const pubListItem = document.createElement('li');
+    pubListItem.textContent = pub.name;
+    pubList.appendChild(pubListItem);
+  });
+  this.pubListContainer.appendChild(pubList);
 };
 
 PubView.prototype.getLatLng = function(pub) {

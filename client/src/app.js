@@ -14,8 +14,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const map = new MapWrapper(mapContainer, {lat: 0, lng: 0}, 15);
 
   const pubSelect = document.querySelector('#pub-select');
-  const pubContainer = document.querySelector('#pub-list-container');
-  const pubView = new PubView(pubSelect, pubContainer);
+  const pubDetailContainer = document.querySelector('#pub-detail-container');
+  const pubListContainer = document.querySelector('#pub-list-container');
+  const pubView = new PubView(pubSelect, pubDetailContainer, pubListContainer);
 
   const pubData = new PubData('http://localhost:3000/crft/');
 
@@ -37,10 +38,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
   pubData.getData((data) => {
     pubView.renderSelect(data);
+    pubView.renderList(data);
     data.forEach((pub) => {
       map.addMarker(pubView.getLatLng(pub));
     });
   });
-
 
 });
