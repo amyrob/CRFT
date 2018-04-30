@@ -25,4 +25,9 @@ MapWrapper.prototype.addClickListener = function () {
   });
 };
 
+MapWrapper.prototype.center = function (lat, lng ) {
+  this.googleMap.setCenter({lat: lat, lng: lng});
+  console.log(lat, lng);
+};
+
 module.exports = MapWrapper;

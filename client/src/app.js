@@ -19,6 +19,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const pubData = new PubData('http://localhost:3000/crft/');
 
+  navigator.geolocation.getCurrentPosition(function(position){
+    const lat = position.coords.latitude;
+    const lng = position.coords.longitude;
+
+    console.log(lat, lng);
+    map.addMarker({lat, lng});
+    console.log('center func', map.center);
+    map.center(lat, lng);
+  });
+
   pubSelect.addEventListener('change', (evt) => {
     const selectedIndex = evt.target.value;
     const selectedPub = pubData.data[selectedIndex];
@@ -32,13 +42,5 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  navigator.geolocation.getCurrentPosition(function(position){
-    const pos = {
-      lat: position.coords.latitude,
-      lng: position.coords.longitude
-    };
-    map.addMarker(pos);
-    map.setCenter(pos);
-  });
 
 });
