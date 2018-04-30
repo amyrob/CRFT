@@ -1,7 +1,6 @@
 {
   "name": "javascript_project",
   "version": "1.0.0",
-  "description": "",
   "main": "server.js",
   "scripts": {
     "build": "webpack -w",
@@ -21,5 +20,14 @@
     "nodemon": "^1.17.3",
     "webpack": "^4.6.0",
     "webpack-cli": "^2.0.15"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Michaela-vE/CRFT.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Michaela-vE/CRFT/issues"
+  },
+  "homepage": "https://github.com/Michaela-vE/CRFT#readme",
+  "description": ""
 }
