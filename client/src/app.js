@@ -9,17 +9,15 @@ const geoRequest = new Request('https://www.googleapis.com/geolocation/v1/geoloc
 document.addEventListener('DOMContentLoaded', () => {
 
   const mapContainer = document.querySelector('#main-map');
-  const defaultCenter = { lat: 55.946962, lng: -3.201958 };
+  // const defaultCenter = { lat: 55.946962, lng: -3.201958 };
 
-  const map = new MapWrapper(mapContainer, defaultCenter, 15);
+  const map = new MapWrapper(mapContainer, {lat: 0, lng: 0}, 15);
 
   const pubSelect = document.querySelector('#pub-select');
   const pubContainer = document.querySelector('#pub-list-container');
   const pubView = new PubView(pubSelect, pubContainer);
 
   const pubData = new PubData('http://localhost:3000/crft/');
-
-
 
   pubSelect.addEventListener('change', (evt) => {
     const selectedIndex = evt.target.value;
@@ -34,5 +32,13 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+  navigator.geolocation.getCurrentPosition(function(position){
+    const pos = {
+      lat: position.coords.latitude,
+      lng: position.coords.longitude
+    };
+    map.addMarker(pos);
+    map.setCenter(pos);
+  });
 
 });
