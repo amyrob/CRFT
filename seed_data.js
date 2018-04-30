@@ -30,8 +30,8 @@ db.pubs.insert(
     "address": "50 Lothian Road, EH3 9BY",
     "tel": "0131 228 2305",
     "opening_hours": "Mon - Fri: 12pm - 1am, Sat & Sun: 11am - 1am ",
-    "lat": 55.9473165,
-    "lng": -3.2066772
+    "lat": 55.947341,
+    "lng": -3.206706
   }
 );
 
