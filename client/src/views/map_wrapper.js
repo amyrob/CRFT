@@ -44,20 +44,21 @@ MapWrapper.prototype.getDistance = function(origins, destinations) {
     if (status == 'OK') {
       const origins = response.originAddresses;
       const destinations = response.destinationAddresses;
+      let results = [];
 
       for (let i = 0; i < origins.length; i++) {
-        const results = response.rows[i].elements;
+        results = response.rows[i].elements;
         for (let j = 0; j < results.length; j++) {
           const element = results[j];
           const distance = element.distance.text;
           const duration = element.duration.text;
           const from = origins[i];
           const to = destinations[j];
-          console.log(distance);
+          // resultsArray.push(element);
         }
+      } console.log(results);
       }
     }
-  }
 };
 
 
