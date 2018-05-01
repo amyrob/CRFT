@@ -34,8 +34,8 @@ MapWrapper.prototype.getDistance = function(origins, destinations) {
   const service = new google.maps.DistanceMatrixService();
   service.getDistanceMatrix(
     {
-      origins: [origins],
-      destinations: [destinations],
+      origins: origins,
+      destinations: destinations,
       travelMode: 'WALKING',
       unitSystem: google.maps.UnitSystem.IMPERIAL,
     }, onComplete
