@@ -35,4 +35,26 @@ db.pubs.insert(
   }
 );
 
+db.pubs.insert(
+  {
+    "name": "Victoria Bar",
+    "address": "265 Leith Walk, EH6 8PD",
+    "tel": "0131 555 1638",
+    "opening_hours": "Mon - Fri: 2pm - 1am, Sat: 12pm - 1am, Sun: 1pm - 12am ",
+    "lat": 55.969565,
+    "lng": -3.183620
+  }
+);
+
+db.pubs.insert(
+  {
+    "name": "Campervan Brewery Taproom",
+    "address": "112 Jane Street, EH6 5HG",
+    "tel": "0131 555 3373",
+    "opening_hours": "Fri: 5pm - 10pm, Sat: 2pm - 9pm",
+    "lat": 55.970939,
+    "lng": -3.1797667
+  }
+);
+
 db.pubs.find();
