@@ -30,16 +30,8 @@ MapWrapper.prototype.center = function (lat, lng ) {
   console.log(lat, lng);
 };
 
-MapWrapper.prototype.getDistance = function(origins, destinations) {
-  const service = new google.maps.DistanceMatrixService();
-  service.getDistanceMatrix(
-    {
-      origins: origins,
-      destinations: destinations,
-      travelMode: 'WALKING',
-      unitSystem: google.maps.UnitSystem.IMPERIAL,
-    }, onComplete
-  );
+MapWrapper.prototype.getDistance = function(origins, destinations, callback) {
+
   function onComplete(response, status) {
     if (status == 'OK') {
       const origins = response.originAddresses;
@@ -56,9 +48,21 @@ MapWrapper.prototype.getDistance = function(origins, destinations) {
           const to = destinations[j];
         };
       };
+      console.log(callback);
+      callback(results);
       console.log(results);
     };
   };
+  // let results;
+  const service = new google.maps.DistanceMatrixService();
+  service.getDistanceMatrix(
+    {
+      origins: origins,
+      destinations: destinations,
+      travelMode: 'WALKING',
+      unitSystem: google.maps.UnitSystem.IMPERIAL,
+    }, onComplete
+  );
 };
 
 
