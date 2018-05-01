@@ -4,7 +4,6 @@ const Request = require('./services/request.js');
 const MapWrapper = require('./views/map_wrapper.js');
 
 const request = new Request('http://localhost:3000/');
-const geoRequest = new Request('https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyANgDsBmHtPFYb8GbPZu1hJnGn8cwTlXBQ');
 
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -45,5 +44,21 @@ document.addEventListener('DOMContentLoaded', () => {
       map.addMarker(pubView.getLatLng(pub));
     });
   });
+
+  const geocoder = new google.maps.Geocoder();
+
+const getLatLngFromAddress = function(address) {
+  geocoder.geocode({'address': address}, function(results, status) {
+  if (status === 'OK') {
+    console.log(results);
+    const lat = results[0].geometry.location.lat();
+    const lng = results[0].geometry.location.lng();
+    const latLng = { lat: lat, lng: lng };
+    console.log(latLng);
+  };
+  return;
+  });
+};
+getLatLngFromAddress('Times Square, New York, NY');
 
 });

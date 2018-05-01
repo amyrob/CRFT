@@ -54,11 +54,11 @@ MapWrapper.prototype.getDistance = function(origins, destinations) {
           const duration = element.duration.text;
           const from = origins[i];
           const to = destinations[j];
-          // resultsArray.push(element);
-        }
-      } console.log(results);
-      }
-    }
+        };
+      };
+      console.log(results);
+    };
+  };
 };
 
 
