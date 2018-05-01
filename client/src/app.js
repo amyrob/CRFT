@@ -47,18 +47,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const geocoder = new google.maps.Geocoder();
 
-const getLatLngFromAddress = function(address) {
-  geocoder.geocode({'address': address}, function(results, status) {
-  if (status === 'OK') {
-    console.log(results);
-    const lat = results[0].geometry.location.lat();
-    const lng = results[0].geometry.location.lng();
-    const latLng = { lat: lat, lng: lng };
-    console.log(latLng);
+  const getLatLngFromAddress = function(address, callback) {
+    let latLng;
+    geocoder.geocode({'address': address}, function(results, status) {
+      if (status === 'OK') {
+        const lat = results[0].geometry.location.lat();
+        const lng = results[0].geometry.location.lng();
+        latLng = { lat: lat, lng: lng };
+        console.log(latLng);
+        callback(latLng);
+      };
+      return;
+    });
   };
-  return;
+
+  getLatLngFromAddress('Edinburgh Castle', (latLng) => {
+    map.addMarker(latLng);
   });
-};
-getLatLngFromAddress('Times Square, New York, NY');
+
+
+
+
+
 
 });
