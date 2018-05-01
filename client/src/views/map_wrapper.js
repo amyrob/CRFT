@@ -30,4 +30,35 @@ MapWrapper.prototype.center = function (lat, lng ) {
   console.log(lat, lng);
 };
 
+MapWrapper.prototype.getDistance = function(origins, destinations) {
+  const service = new google.maps.DistanceMatrixService();
+  service.getDistanceMatrix(
+    {
+      origins: [origins],
+      destinations: [destinations],
+      travelMode: 'WALKING',
+      unitSystem: google.maps.UnitSystem.IMPERIAL,
+    }, onComplete
+  );
+  function onComplete(response, status) {
+    if (status == 'OK') {
+      const origins = response.originAddresses;
+      const destinations = response.destinationAddresses;
+
+      for (let i = 0; i < origins.length; i++) {
+        const results = response.rows[i].elements;
+        for (let j = 0; j < results.length; j++) {
+          const element = results[j];
+          const distance = element.distance.text;
+          const duration = element.duration.text;
+          const from = origins[i];
+          const to = destinations[j];
+          console.log(distance);
+        }
+      }
+    }
+  }
+};
+
+
 module.exports = MapWrapper;

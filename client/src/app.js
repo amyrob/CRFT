@@ -36,6 +36,8 @@ document.addEventListener('DOMContentLoaded', () => {
     pubView.renderDetail(selectedPub);
   });
 
+  map.getDistance({ lat: 55.946962, lng: -3.201958 }, {lat: 55.969565, lng: -3.183620});
+
   pubData.getData((data) => {
     pubView.renderSelect(data);
     pubView.renderList(data);
