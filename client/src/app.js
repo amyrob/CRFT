@@ -36,7 +36,8 @@ document.addEventListener('DOMContentLoaded', () => {
     pubView.renderDetail(selectedPub);
   });
 
-  map.getDistance([{ lat: 55.946962, lng: -3.201958 }, { lat: 55.946962, lng: -3.201958 }], [{lat: 55.969565, lng: -3.183620}, {lat: 55.947341, lng: -3.206706}]);
+  // map.getDistance([{ lat: 55.946962, lng: -3.201958 }, { lat: 55.946962, lng: -3.201958 }], [{lat: 55.969565, lng: -3.183620}, {lat: 55.947341, lng: -3.206706}]);
+  map.getDistance(["37 Castle Terrace, EH1 2EL", "37 Castle Terrace, EH1 2EL"], ["50 Lothian Road, EH3 9BY", "265 Leith Walk, EH6 8PD"]);
 
   pubData.getData((data) => {
     pubView.renderSelect(data);
