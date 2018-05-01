@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const mapContainer = document.querySelector('#main-map');
   // const defaultCenter = { lat: 55.946962, lng: -3.201958 };
 
-  const map = new MapWrapper(mapContainer, {lat: 0, lng: 0}, 15);
+  const map = new MapWrapper(mapContainer, {lat: 55.946962, lng: -3.201958}, 15);
 
   const pubSelect = document.querySelector('#pub-select');
   const pubDetailContainer = document.querySelector('#pub-detail-container');
@@ -41,7 +41,9 @@ document.addEventListener('DOMContentLoaded', () => {
     pubView.renderSelect(data);
     pubView.renderList(data);
     data.forEach((pub) => {
-      map.addMarker(pubView.getLatLng(pub));
+    getLatLngFromAddress(pub.address, (latLng) => {
+      map.addMarker(latLng);
+    })
     });
   });
 
