@@ -55,12 +55,10 @@ MapWrapper.prototype.getDistance = function(origins, destinations, callback) {
           const to = destinations[j];
         };
       };
-      console.log(callback);
       callback(results);
-      console.log(results);
     };
   };
-  // let results;
+
   const service = new google.maps.DistanceMatrixService();
   service.getDistanceMatrix(
     {
