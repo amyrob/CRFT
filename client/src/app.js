@@ -18,11 +18,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const pubData = new PubData('http://localhost:3000/crft/');
 
-  pubSelect.addEventListener('change', (evt) => {
-    const selectedIndex = evt.target.value;
-    const selectedPub = pubData.data[selectedIndex];
-    pubView.renderDetail(selectedPub);
-  });
+  // pubSelect.addEventListener('change', (evt) => {
+  //   const selectedIndex = evt.target.value;
+  //   const selectedPub = pubData.data[selectedIndex];
+  //   pubView.renderDetail(selectedPub);
+  // });
 
   const pubsArray = [];
   pubData.getData((data) => {
@@ -55,11 +55,6 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     });
   };
-
-
-
-
-
 
 
 });
