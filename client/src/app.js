@@ -10,10 +10,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const mapContainer = document.querySelector('#main-map');
 
-  // const map = new MapWrapper(mapContainer, {lat: 0, lng: 0}, 15);
-  // map.setCenterThroughGeolocation();
-  let map;
-
   const pubSelect = document.querySelector('#pub-select');
   const pubDetailContainer = document.querySelector('#pub-detail-container');
   const pubListContainer = document.querySelector('#pub-list-container');
@@ -28,18 +24,6 @@ document.addEventListener('DOMContentLoaded', () => {
     pubView.renderDetail(selectedPub);
   });
 
-
-  // pubData.getData((data) => {
-  //   pubView.renderSelect(data);
-  //   pubView.renderList(data);
-  //   pubView.renderDistanceList(data, map, [{lat: 55.946962, lng: -3.201958}]);
-  //   data.forEach((pub) => {
-  //   getLatLngFromAddress(pub.address, (latLng) => {
-  //     map.addMarker(latLng);
-  //   });
-  //   });
-  // });
-
   pubData.getData((data) => {
     const center = {lat: 55.953251, lng: -3.188267 };
     const map = new MapWrapper(mapContainer, center, 15);
@@ -51,7 +35,6 @@ document.addEventListener('DOMContentLoaded', () => {
         map.getDistance([center], [latLng], (results) => {
           newPub.distance = results[0].distance.text;
         });
-        console.log(newPub);
       });
     });
   });
