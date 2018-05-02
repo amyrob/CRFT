@@ -2,6 +2,7 @@ const PubView = require('./views/pub_view.js');
 const PubData = require('./models/pub_data.js');
 const Request = require('./services/request.js');
 const MapWrapper = require('./views/map_wrapper.js');
+const Pub = require('./models/pub.js');
 
 const request = new Request('http://localhost:3000/');
 
@@ -44,7 +45,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const map = new MapWrapper(mapContainer, center, 15);
     map.setCenterThroughGeolocation();
     console.log(map.center);
-    // map.center = center;
     data.forEach((pub) => {
       console.log(map.center);
     });
