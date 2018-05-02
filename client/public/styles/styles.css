@@ -20,6 +20,26 @@ html, body {
   font-size: 36px;
 }
 
+#div-buttons{
+  text-align: center;
+}
+
+.age-buttons {
+  font-size: 320%;
+  margin: 5%;
+  color: white;
+}
+
+#aye {
+  border-color: green;
+  background-color: green;
+}
+
+#naw {
+  border-color: red;
+  background-color: red;
+}
+
 #search-bar {
   height: 10vh;
   width: 100%;
