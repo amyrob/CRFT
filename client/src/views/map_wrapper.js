@@ -89,6 +89,7 @@ MapWrapper.prototype.setCenterThroughGeolocation = function() {
       handleLocationError(true, map.getCenter());
     })
   } else {
+    map.setCenter({lat: 55.953251, lng: -3.188267 });
     handleLocationError(false, map.getCenter());
   }
   function handleLocationError(browserHasGeolocation, pos) {

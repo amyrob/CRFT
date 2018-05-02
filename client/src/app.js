@@ -34,9 +34,17 @@ document.addEventListener('DOMContentLoaded', () => {
     data.forEach((pub) => {
     getLatLngFromAddress(pub.address, (latLng) => {
       map.addMarker(latLng);
-    })
+    });
     });
   });
+
+  // pubData.getData((data) => {
+  //   const map = new MapWrapper(mapContainer, map.setCenterThroughGeolocation(), 15);
+  //
+  //   data.forEach((pub) => {
+  //
+  //   })
+  // });
 
   const geocoder = new google.maps.Geocoder();
 
