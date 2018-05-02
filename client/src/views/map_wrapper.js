@@ -9,10 +9,15 @@ const MapWrapper = function (container, center, zoomLevel) {
 };
 
 MapWrapper.prototype.addMarker = function (coords) {
+  const image = {url: "/styles/pint-glass-icon-25.png",
+  scaledSize: new google.maps.Size(50, 50),
+  origin: new google.maps.Point(0,0),
+  anchor: new google.maps.Point(0, 0) };
   const marker = new google.maps.Marker({
     map: this.googleMap,
     position: coords,
-    animation: google.maps.Animation.DROP
+    animation: google.maps.Animation.DROP,
+    icon: image
   });
   this.markers.push(marker);
 };
