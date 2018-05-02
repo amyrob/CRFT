@@ -18,12 +18,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const pubData = new PubData('http://localhost:3000/crft/');
 
-  // pubSelect.addEventListener('change', (evt) => {
-  //   const selectedIndex = evt.target.value;
-  //   const selectedPub = pubData.data[selectedIndex];
-  //   pubView.renderDetail(selectedPub);
-  // });
-
   const pubsArray = [];
   pubData.getData((data) => {
     const center = {lat: 55.953251, lng: -3.188267 };
@@ -34,11 +28,17 @@ document.addEventListener('DOMContentLoaded', () => {
       getLatLngFromAddress(pub.address, (latLng) => {
         newPub.latLng = latLng;
         map.getDistance([center], [latLng], (results) => {
-          newPub.distance = results[0].distance.text;
+          newPub.distance = results[0].distance.value;
           pubsArray.push(newPub);
+          pubsArray.sort(function (pubA, pubB) {
+            console.log(pubA.distance);
+            return pubA.distance - pubB.distance;
+          });
+          console.log(pubsArray);
         });
       });
     });
+    map.addMarker(center);
   });
 
   const geocoder = new google.maps.Geocoder();
