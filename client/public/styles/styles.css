@@ -1,19 +1,43 @@
-#splash-image {
-  background-image: url()
+html, body {
+  /* overflow-y: hidden; */
+  margin: 0%;
+  padding: 0%;
 }
 
 
 
+#splash-screen {
+  height: 100vh;
+  width: 100%;
+  background-image: url(../images/beer-bottle-splash-page.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+#age-check{
+  text-align: center;
+  font-family: Helvetica;
+  font-size: 36px;
+}
+
+#search-bar {
+  height: 10vh;
+  width: 100%;
+}
+
+
 #main-map {
-  height:500px;
-  width:500px;
+  height: 90vh;
+  width: 100%;
 }
 
 h1 {
   font-family: 'Gugi', cursive;
   color: #fbbd38;
   text-shadow: 4px 4px 4px black;
-  font-size: 60px;
+  font-size: 120px;
+  text-align: center;
+  margin: 0;
 }
 
 ul {
