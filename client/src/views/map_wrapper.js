@@ -6,6 +6,8 @@ const MapWrapper = function (container, center, zoomLevel) {
   });
 
   this.markers = [];
+  this.center = center;
+
 };
 
 MapWrapper.prototype.addMarker = function (coords) {
@@ -89,7 +91,8 @@ MapWrapper.prototype.setCenterThroughGeolocation = function() {
       handleLocationError(true, map.getCenter());
     })
   } else {
-    map.setCenter({lat: 55.953251, lng: -3.188267 });
+    this.center = {lat: 55.953251, lng: -3.188267 };
+    map.setCenter(this.center);
     handleLocationError(false, map.getCenter());
   }
   function handleLocationError(browserHasGeolocation, pos) {
@@ -98,9 +101,9 @@ MapWrapper.prototype.setCenterThroughGeolocation = function() {
     //   `Error: The Geolocation service failed.` :
     //   `Error: Your browser doesn't support geolocation.`);
     //   infoWindow.open(map);
-console.log('ERROR WITH GEOLOCATION');
-    };
+    console.log('ERROR WITH GEOLOCATION');
   };
+};
 
 
 module.exports = MapWrapper;

@@ -9,8 +9,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const mapContainer = document.querySelector('#main-map');
 
-  const map = new MapWrapper(mapContainer, {lat: 0, lng: 0}, 15);
-  map.setCenterThroughGeolocation();
+  // const map = new MapWrapper(mapContainer, {lat: 0, lng: 0}, 15);
+  // map.setCenterThroughGeolocation();
+  let map;
 
   const pubSelect = document.querySelector('#pub-select');
   const pubDetailContainer = document.querySelector('#pub-detail-container');
@@ -27,24 +28,27 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
 
+  // pubData.getData((data) => {
+  //   pubView.renderSelect(data);
+  //   pubView.renderList(data);
+  //   pubView.renderDistanceList(data, map, [{lat: 55.946962, lng: -3.201958}]);
+  //   data.forEach((pub) => {
+  //   getLatLngFromAddress(pub.address, (latLng) => {
+  //     map.addMarker(latLng);
+  //   });
+  //   });
+  // });
+
   pubData.getData((data) => {
-    pubView.renderSelect(data);
-    pubView.renderList(data);
-    pubView.renderDistanceList(data, map, [{lat: 55.946962, lng: -3.201958}]);
+    const center = {lat: 55.953251, lng: -3.188267 };
+    const map = new MapWrapper(mapContainer, center, 15);
+    map.setCenterThroughGeolocation();
+    console.log(map.center);
+    // map.center = center;
     data.forEach((pub) => {
-    getLatLngFromAddress(pub.address, (latLng) => {
-      map.addMarker(latLng);
-    });
+      console.log(map.center);
     });
   });
-
-  // pubData.getData((data) => {
-  //   const map = new MapWrapper(mapContainer, map.setCenterThroughGeolocation(), 15);
-  //
-  //   data.forEach((pub) => {
-  //
-  //   })
-  // });
 
   const geocoder = new google.maps.Geocoder();
 
