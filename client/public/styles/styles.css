@@ -1,4 +1,21 @@
 #main-map {
   height:500px;
   width:500px;
-};
+}
+
+h1 {
+  font-family: 'Gugi', cursive;
+  color: #fbbd38;
+  text-shadow: 4px 4px 4px black;
+  font-size: 60px;
+}
+
+ul {
+  list-style: none;
+  font-family: 'Gugi', cursive;
+  color: black;
+}
+
+body {
+  background-color: #BFBDC1;
+}
