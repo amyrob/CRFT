@@ -10,7 +10,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const mapContainer = document.querySelector('#main-map');
   // const defaultCenter = { lat: 55.946962, lng: -3.201958 };
 
-  const map = new MapWrapper(mapContainer, {lat: 55.946962, lng: -3.201958}, 15);
+  const map = new MapWrapper(mapContainer, {lat: 0, lng: 0}, 15);
+  map.setCenterThroughGeolocation();
 
   const pubSelect = document.querySelector('#pub-select');
   const pubDetailContainer = document.querySelector('#pub-detail-container');
@@ -20,15 +21,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const pubData = new PubData('http://localhost:3000/crft/');
 
-  navigator.geolocation.getCurrentPosition(function(position){
-    const lat = position.coords.latitude;
-    const lng = position.coords.longitude;
-
-    console.log(lat, lng);
-    map.addMarker({lat, lng});
-    console.log('center func', map.center);
-    map.center(lat, lng);
-  });
+  // navigator.geolocation.getCurrentPosition(function(position){
+  //   const lat = position.coords.latitude;
+  //   const lng = position.coords.longitude;
+  //
+  //   console.log(lat, lng);
+  //   map.addMarker({lat, lng});
+  //   console.log('center func', map.center);
+  //   map.center(lat, lng);
+  // });
 
   pubSelect.addEventListener('change', (evt) => {
     const selectedIndex = evt.target.value;
@@ -63,10 +64,10 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     });
   };
-
-  getLatLngFromAddress('Edinburgh Castle', (latLng) => {
-    map.addMarker(latLng);
-  });
+  //
+  // getLatLngFromAddress('Edinburgh Castle', (latLng) => {
+  //   map.addMarker(latLng);
+  // });
 
 
 

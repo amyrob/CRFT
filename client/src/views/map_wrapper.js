@@ -70,5 +70,36 @@ MapWrapper.prototype.getDistance = function(origins, destinations, callback) {
   );
 };
 
+MapWrapper.prototype.setCenterThroughGeolocation = function() {
+  let map = this.googleMap;
+  // let infoWindow;
+  // infoWindow = new google.maps.InfoWindow;
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function(position) {
+      const pos = {
+        lat: position.coords.latitude,
+        lng: position.coords.longitude
+      };
+      // infoWindow.setPosition(pos);
+      // infoWindow.setContent('Location found.');
+      // infoWindow.open(map);
+      this.center = pos;
+      map.setCenter(pos);
+    }, function() {
+      handleLocationError(true, map.getCenter());
+    })
+  } else {
+    handleLocationError(false, map.getCenter());
+  }
+  function handleLocationError(browserHasGeolocation, pos) {
+    // infoWindow.setPosition(pos);
+    // infoWindow.setContent(browserHasGeolocation ?
+    //   `Error: The Geolocation service failed.` :
+    //   `Error: Your browser doesn't support geolocation.`);
+    //   infoWindow.open(map);
+console.log('ERROR WITH GEOLOCATION');
+    };
+  };
+
 
 module.exports = MapWrapper;
