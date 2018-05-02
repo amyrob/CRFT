@@ -32,10 +32,10 @@ MapWrapper.prototype.addClickListener = function () {
   });
 };
 
-MapWrapper.prototype.center = function (lat, lng ) {
-  this.googleMap.setCenter({lat: lat, lng: lng});
-  console.log(lat, lng);
-};
+// MapWrapper.prototype.center = function (lat, lng ) {
+//   this.googleMap.setCenter({lat: lat, lng: lng});
+//   console.log(lat, lng);
+// };
 
 MapWrapper.prototype.getDistance = function(origins, destinations, callback) {
 
@@ -72,15 +72,18 @@ MapWrapper.prototype.getDistance = function(origins, destinations, callback) {
 
 MapWrapper.prototype.setCenterThroughGeolocation = function() {
   let map = this.googleMap;
-  // let infoWindow;
-  // infoWindow = new google.maps.InfoWindow;
+  let centerMarker;
+  centerMarker = new google.maps.Marker ({
+    map: this.googleMap,
+    animation: google.maps.Animation.DROP
+  });
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(function(position) {
       const pos = {
         lat: position.coords.latitude,
-        lng: position.coords.longitude
+        lng: position.coords.longitude,
       };
-      // infoWindow.setPosition(pos);
+      centerMarker.setPosition(pos);
       // infoWindow.setContent('Location found.');
       // infoWindow.open(map);
       this.center = pos;

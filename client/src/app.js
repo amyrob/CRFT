@@ -27,18 +27,17 @@ document.addEventListener('DOMContentLoaded', () => {
       const newPub = new Pub(pub.name, pub.address, pub.tel, pub.opening_hours);
       getLatLngFromAddress(pub.address, (latLng) => {
         newPub.latLng = latLng;
+        map.addMarker(latLng);
         map.getDistance([center], [latLng], (results) => {
           newPub.distance = results[0].distance.value;
           pubsArray.push(newPub);
           pubsArray.sort(function (pubA, pubB) {
-            console.log(pubA.distance);
             return pubA.distance - pubB.distance;
           });
-          console.log(pubsArray);
         });
       });
+      console.log(pubsArray);
     });
-    map.addMarker(center);
   });
 
   const geocoder = new google.maps.Geocoder();
