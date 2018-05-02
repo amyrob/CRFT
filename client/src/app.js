@@ -8,7 +8,6 @@ const request = new Request('http://localhost:3000/');
 document.addEventListener('DOMContentLoaded', () => {
 
   const mapContainer = document.querySelector('#main-map');
-  // const defaultCenter = { lat: 55.946962, lng: -3.201958 };
 
   const map = new MapWrapper(mapContainer, {lat: 0, lng: 0}, 15);
   map.setCenterThroughGeolocation();
@@ -21,23 +20,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const pubData = new PubData('http://localhost:3000/crft/');
 
-  // navigator.geolocation.getCurrentPosition(function(position){
-  //   const lat = position.coords.latitude;
-  //   const lng = position.coords.longitude;
-  //
-  //   console.log(lat, lng);
-  //   map.addMarker({lat, lng});
-  //   console.log('center func', map.center);
-  //   map.center(lat, lng);
-  // });
-
   pubSelect.addEventListener('change', (evt) => {
     const selectedIndex = evt.target.value;
     const selectedPub = pubData.data[selectedIndex];
     pubView.renderDetail(selectedPub);
   });
 
-  // map.getDistance(["37 Castle Terrace, EH1 2EL", "37 Castle Terrace, EH1 2EL"], ["50 Lothian Road, EH3 9BY", "265 Leith Walk, EH6 8PD"]);
 
   pubData.getData((data) => {
     pubView.renderSelect(data);
@@ -64,10 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     });
   };
-  //
-  // getLatLngFromAddress('Edinburgh Castle', (latLng) => {
-  //   map.addMarker(latLng);
-  // });
+
 
 
 
