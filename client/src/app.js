@@ -44,9 +44,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const center = {lat: 55.953251, lng: -3.188267 };
     const map = new MapWrapper(mapContainer, center, 15);
     map.setCenterThroughGeolocation();
-    console.log(map.center);
     data.forEach((pub) => {
-      console.log(map.center);
+      const newPub = new Pub(pub.name, pub.address, pub.tel, pub.opening_hours);
+      getLatLngFromAddress(pub.address, (latLng) => {
+        newPub.latLng = latLng;
+      });
+      console.log(newPub);
     });
   });
 
