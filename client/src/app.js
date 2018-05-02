@@ -24,6 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
     pubView.renderDetail(selectedPub);
   });
 
+  const pubsArray = [];
   pubData.getData((data) => {
     const center = {lat: 55.953251, lng: -3.188267 };
     const map = new MapWrapper(mapContainer, center, 15);
@@ -34,6 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
         newPub.latLng = latLng;
         map.getDistance([center], [latLng], (results) => {
           newPub.distance = results[0].distance.text;
+          pubsArray.push(newPub);
         });
       });
     });
