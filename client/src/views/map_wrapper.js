@@ -1,12 +1,14 @@
 const MapWrapper = function (container, center, zoomLevel) {
 
-  this.googleMap = new google.maps.Map(container, {
+this.googleMap = new google.maps.Map(
+  container,
+  {
     center: center,
     zoom: zoomLevel
   });
 
-  this.markers = [];
-  this.center = center;
+  // this.markers = [];
+  // this.center = center;
 
 };
 
@@ -21,16 +23,16 @@ MapWrapper.prototype.addMarker = function (coords) {
     animation: google.maps.Animation.DROP,
     icon: image
   });
-  this.markers.push(marker);
+  // this.markers.push(marker);
 };
 
-MapWrapper.prototype.addClickListener = function () {
-  google.maps.event.addListener(this.googleMap, 'click', (evt) => {
-    const lat = evt.latLng.lat();
-    const lng = evt.latLng.lng();
-    this.addMarker({lat: lat, lng: lng});
-  });
-};
+// MapWrapper.prototype.addClickListener = function () {
+//   google.maps.event.addListener(this.googleMap, 'click', (evt) => {
+//     const lat = evt.latLng.lat();
+//     const lng = evt.latLng.lng();
+//     this.addMarker({lat: lat, lng: lng});
+//   });
+// };
 
 // MapWrapper.prototype.center = function (lat, lng ) {
 //   this.googleMap.setCenter({lat: lat, lng: lng});
@@ -70,41 +72,55 @@ MapWrapper.prototype.getDistance = function(origins, destinations, callback) {
   );
 };
 
-MapWrapper.prototype.setCenterThroughGeolocation = function() {
-  let map = this.googleMap;
+
+MapWrapper.prototype.addCenterMarker = function(coords){
   let centerMarker;
   centerMarker = new google.maps.Marker ({
     map: this.googleMap,
+    position: coords,
     animation: google.maps.Animation.DROP
   });
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(function(position) {
-      const pos = {
-        lat: position.coords.latitude,
-        lng: position.coords.longitude,
-      };
-      centerMarker.setPosition(pos);
-      // infoWindow.setContent('Location found.');
-      // infoWindow.open(map);
-      this.center = pos;
-      map.setCenter(pos);
-    }, function() {
-      handleLocationError(true, map.getCenter());
-    })
-  } else {
-    this.center = {lat: 55.953251, lng: -3.188267 };
-    map.setCenter(this.center);
-    handleLocationError(false, map.getCenter());
-  }
-  function handleLocationError(browserHasGeolocation, pos) {
-    // infoWindow.setPosition(pos);
-    // infoWindow.setContent(browserHasGeolocation ?
-    //   `Error: The Geolocation service failed.` :
-    //   `Error: Your browser doesn't support geolocation.`);
-    //   infoWindow.open(map);
-    console.log('ERROR WITH GEOLOCATION');
-  };
 };
 
+  MapWrapper.prototype.setCenter = function (coords) {
+    this.googleMap.panTo(coords);
+  };
 
-module.exports = MapWrapper;
+  // MapWrapper.prototype.setCenterThroughGeolocation = function() {
+  //   let map = this.googleMap;
+  //   let centerMarker;
+  //   centerMarker = new google.maps.Marker ({
+  //     map: this.googleMap,
+  //     animation: google.maps.Animation.DROP
+  //   });
+  //   if (navigator.geolocation) {
+  //     navigator.geolocation.getCurrentPosition(function(position) {
+  //       const pos = {
+  //         lat: position.coords.latitude,
+  //         lng: position.coords.longitude,
+  //       };
+  //       centerMarker.setPosition(pos);
+  //       // infoWindow.setContent('Location found.');
+  //       // infoWindow.open(map);
+  //       this.center = pos;
+  //       map.setCenter(pos);
+  //     }, function() {
+  //       handleLocationError(true, map.getCenter());
+  //     })
+  //   } else {
+  //     this.center = {lat: 55.953251, lng: -3.188267 };
+  //     map.setCenter(this.center);
+  //     handleLocationError(false, map.getCenter());
+  //   }
+  //   function handleLocationError(browserHasGeolocation, pos) {
+  //     // infoWindow.setPosition(pos);
+  //     // infoWindow.setContent(browserHasGeolocation ?
+  //     //   `Error: The Geolocation service failed.` :
+  //     //   `Error: Your browser doesn't support geolocation.`);
+  //     //   infoWindow.open(map);
+  //     console.log('ERROR WITH GEOLOCATION');
+  //   };
+  // };
+
+
+  module.exports = MapWrapper;

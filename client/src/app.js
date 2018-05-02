@@ -20,21 +20,49 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const pubsArray = [];
   pubData.getData((data) => {
-    const center = {lat: 55.953251, lng: -3.188267 };
+    let center = {lat: 55.953251, lng: -3.188267 };
     const map = new MapWrapper(mapContainer, center, 15);
-    map.setCenterThroughGeolocation();
+    // map.setCenterThroughGeolocation();
+
+    const getCoordsAndSetCenter = function (pos, setCenter){
+      const lat = pos.coords.latitude;
+      const lng = pos.coords.longitude;
+      const coords = {lat: lat, lng: lng};
+      console.log(coords);
+      map.setCenter(coords);
+      map.addCenterMarker(coords);
+    }
+
+    const getCoordsAndGetDistance = function(pos, getDistance){
+      const lat = pos.coords.latitude;
+      const lng = pos.coords.longitude;
+      const coords = {lat: lat, lng: lng};
+      const latLng = newPub.latLng;
+      map.getDistance([coords], [latLng], (results) => {
+        newPub.distance = results[0].distance.value;
+        pubsArray.push(newPub);
+        pubsArray.sort(function (pubA, pubB) {
+          return pubA.distance - pubB.distance;
+        });
+      });
+    };
+
+    navigator.geolocation.getCurrentPosition(getCoordsAndSetCenter);
+
     data.forEach((pub) => {
       const newPub = new Pub(pub.name, pub.address, pub.tel, pub.opening_hours);
       getLatLngFromAddress(pub.address, (latLng) => {
         newPub.latLng = latLng;
         map.addMarker(latLng);
-        map.getDistance([center], [latLng], (results) => {
-          newPub.distance = results[0].distance.value;
-          pubsArray.push(newPub);
-          pubsArray.sort(function (pubA, pubB) {
-            return pubA.distance - pubB.distance;
-          });
-        });
+        navigator.geolocation.getCurrentPosition(getCoordsAndGetDistance());
+        //   map.getDistance([center], [latLng], (results) => {
+        //     newPub.distance = results[0].distance.value;
+        //     pubsArray.push(newPub);
+        //     pubsArray.sort(function (pubA, pubB) {
+        //       return pubA.distance - pubB.distance;
+        //     });
+        //   });
+        // }
       });
       console.log(pubsArray);
     });
