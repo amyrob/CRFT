@@ -48,8 +48,8 @@ document.addEventListener('DOMContentLoaded', () => {
       const newPub = new Pub(pub.name, pub.address, pub.tel, pub.opening_hours);
       getLatLngFromAddress(pub.address, (latLng) => {
         newPub.latLng = latLng;
+        console.log(newPub);
       });
-      console.log(newPub);
     });
   });
 

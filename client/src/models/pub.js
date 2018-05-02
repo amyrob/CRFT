@@ -1,13 +1,11 @@
-const Pub = function (name, address, tel, opening_hours, latLng){
+const Pub = function (name, address, tel, opening_hours){
   this.name = name;
   this.address = address;
   this.tel = tel;
   this.opening_hours = opening_hours;
-  this.latLng = latLng;
+  this.latLng = null;
+  this.distance = null;
 };
 
-Pub.prototype.getLatLng = function (latLng) {
-  this.latLng = latLng;
-};
 
 module.exports = Pub;
