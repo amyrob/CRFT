@@ -34,10 +34,10 @@ PubView.prototype.renderDistanceList = function(pubData, map, origin) {
     const latLng = [{lat: lat, lng: lng}];
 
 
-    map.getDistance(origin, latLng, (results) => {
-      distanceListItem.textContent = `${pub.name}, distance: ${results[0].distance.text} `;
-      distanceList.appendChild(distanceListItem);
-    });
+    // map.getDistance(origin, latLng, (results) => {
+    //   distanceListItem.textContent = `${pub.name}, distance: ${results[0].distance.text} `;
+    //   distanceList.appendChild(distanceListItem);
+    // });
   });
   this.distanceListContainer.appendChild(distanceList);
 };

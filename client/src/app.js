@@ -2,15 +2,13 @@ const PubView = require('./views/pub_view.js');
 const PubData = require('./models/pub_data.js');
 const Request = require('./services/request.js');
 const MapWrapper = require('./views/map_wrapper.js');
+const Pub = require('./models/pub.js');
 
 const request = new Request('http://localhost:3000/');
 
 document.addEventListener('DOMContentLoaded', () => {
 
   const mapContainer = document.querySelector('#main-map');
-  // const defaultCenter = { lat: 55.946962, lng: -3.201958 };
-
-  const map = new MapWrapper(mapContainer, {lat: 55.946962, lng: -3.201958}, 15);
 
   const pubSelect = document.querySelector('#pub-select');
   const pubDetailContainer = document.querySelector('#pub-detail-container');
@@ -20,32 +18,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const pubData = new PubData('http://localhost:3000/crft/');
 
-  navigator.geolocation.getCurrentPosition(function(position){
-    const lat = position.coords.latitude;
-    const lng = position.coords.longitude;
-
-    console.log(lat, lng);
-    map.addMarker({lat, lng});
-    console.log('center func', map.center);
-    map.center(lat, lng);
-  });
-
   pubSelect.addEventListener('change', (evt) => {
     const selectedIndex = evt.target.value;
     const selectedPub = pubData.data[selectedIndex];
     pubView.renderDetail(selectedPub);
   });
 
-  // map.getDistance(["37 Castle Terrace, EH1 2EL", "37 Castle Terrace, EH1 2EL"], ["50 Lothian Road, EH3 9BY", "265 Leith Walk, EH6 8PD"]);
-
+  const pubsArray = [];
   pubData.getData((data) => {
-    pubView.renderSelect(data);
-    pubView.renderList(data);
-    pubView.renderDistanceList(data, map, [{lat: 55.946962, lng: -3.201958}]);
+    const center = {lat: 55.953251, lng: -3.188267 };
+    const map = new MapWrapper(mapContainer, center, 15);
+    map.setCenterThroughGeolocation();
     data.forEach((pub) => {
-    getLatLngFromAddress(pub.address, (latLng) => {
-      map.addMarker(latLng);
-    })
+      const newPub = new Pub(pub.name, pub.address, pub.tel, pub.opening_hours);
+      getLatLngFromAddress(pub.address, (latLng) => {
+        newPub.latLng = latLng;
+        map.getDistance([center], [latLng], (results) => {
+          newPub.distance = results[0].distance.text;
+          pubsArray.push(newPub);
+        });
+      });
     });
   });
 
@@ -64,9 +56,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   };
 
-  getLatLngFromAddress('Edinburgh Castle', (latLng) => {
-    map.addMarker(latLng);
-  });
 
 
 
