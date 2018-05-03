@@ -32,10 +32,10 @@ MapWrapper.prototype.addClickListener = function () {
   });
 };
 
-MapWrapper.prototype.center = function (lat, lng ) {
-  this.googleMap.setCenter({lat: lat, lng: lng});
-  console.log(lat, lng);
-};
+// MapWrapper.prototype.center = function (lat, lng ) {
+//   this.googleMap.setCenter({lat: lat, lng: lng});
+//   console.log(lat, lng);
+// };
 
 MapWrapper.prototype.getDistance = function(origins, destinations, callback) {
 
@@ -49,7 +49,7 @@ MapWrapper.prototype.getDistance = function(origins, destinations, callback) {
         results = response.rows[i].elements;
         for (let j = 0; j < results.length; j++) {
           const element = results[j];
-          const distance = element.distance.text;
+          const distance = element.distance.value;
           const duration = element.duration.text;
           const from = origins[i];
           const to = destinations[j];
@@ -70,21 +70,27 @@ MapWrapper.prototype.getDistance = function(origins, destinations, callback) {
   );
 };
 
-MapWrapper.prototype.setCenterThroughGeolocation = function() {
+MapWrapper.prototype.setCenterThroughGeolocation = function(onComplete) {
   let map = this.googleMap;
-  // let infoWindow;
-  // infoWindow = new google.maps.InfoWindow;
+  let centerMarker;
+  centerMarker = new google.maps.Marker ({
+    map: this.googleMap,
+    animation: google.maps.Animation.DROP
+  });
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(function(position) {
       const pos = {
         lat: position.coords.latitude,
-        lng: position.coords.longitude
+        lng: position.coords.longitude,
       };
-      // infoWindow.setPosition(pos);
+      centerMarker.setPosition(pos);
       // infoWindow.setContent('Location found.');
       // infoWindow.open(map);
       this.center = pos;
       map.setCenter(pos);
+      onComplete(pos);
+
+
     }, function() {
       handleLocationError(true, map.getCenter());
     })
@@ -100,6 +106,17 @@ MapWrapper.prototype.setCenterThroughGeolocation = function() {
     //   `Error: Your browser doesn't support geolocation.`);
     //   infoWindow.open(map);
     console.log('ERROR WITH GEOLOCATION');
+  };
+};
+
+MapWrapper.prototype.autocomplete = function(input) {
+  const autocomplete = new google.maps.places.Autocomplete(input);
+  const places = new google.maps.places.PlacesService(this.googleMap);
+  autocomplete.addListener('place_changed', onPlaceChanged);
+  function onPlaceChanged() {
+    const placeResult = autocomplete.getPlace();
+    console.log(placeResult);
+    return placeResult;
   };
 };
 

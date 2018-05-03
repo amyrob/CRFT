@@ -25,22 +25,22 @@ PubView.prototype.renderList = function(pubData) {
   this.pubListContainer.appendChild(pubList);
 };
 
-PubView.prototype.renderDistanceList = function(pubData, map, origin) {
-  const distanceList = document.createElement('ul');
-  pubData.forEach((pub) => {
-    const distanceListItem = document.createElement('li');
-    const lat = pub.lat;
-    const lng = pub.lng;
-    const latLng = [{lat: lat, lng: lng}];
-
-
-    // map.getDistance(origin, latLng, (results) => {
-    //   distanceListItem.textContent = `${pub.name}, distance: ${results[0].distance.text} `;
-    //   distanceList.appendChild(distanceListItem);
-    // });
-  });
-  this.distanceListContainer.appendChild(distanceList);
-};
+// PubView.prototype.renderDistanceList = function(pubData, map, origin) {
+//   const distanceList = document.createElement('ul');
+//   pubData.forEach((pub) => {
+//     const distanceListItem = document.createElement('li');
+//     const lat = pub.lat;
+//     const lng = pub.lng;
+//     const latLng = [{lat: lat, lng: lng}];
+//
+//
+//     map.getDistance(origin, latLng, (results) => {
+//       distanceListItem.textContent = `${pub.name}, distance: ${results[0].distance.text} `;
+//       distanceList.appendChild(distanceListItem);
+//     });
+//   });
+//   this.distanceListContainer.appendChild(distanceList);
+// };
 
 // const populateDistances = function(results){
 //   distances.forEach
