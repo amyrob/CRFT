@@ -73,9 +73,11 @@ MapWrapper.prototype.getDistance = function(origins, destinations, callback) {
 MapWrapper.prototype.setCenterThroughGeolocation = function(onComplete) {
   let map = this.googleMap;
   let centerMarker;
+  image = "http://maps.google.com/mapfiles/ms/icons/blue-dot.png";
   centerMarker = new google.maps.Marker ({
     map: this.googleMap,
-    animation: google.maps.Animation.DROP
+    animation: google.maps.Animation.DROP,
+    icon: image
   });
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(function(position) {
