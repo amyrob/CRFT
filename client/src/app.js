@@ -57,4 +57,27 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
 
+  const ayeButton = document.querySelector("#aye");
+  ayeButton.addEventListener('click', function (){
+    scrollTo({
+      top: 1000,
+      behavior: "smooth"
+    });
+
+    setTimeout(()=> {const body = document.querySelector("body");
+    body.style.overflow = 'auto';}, 600);
+
+
+    let splashImage = document.querySelector("#splash-screen");
+    // splashImage.style.height = '30vh';
+    setTimeout(removeSplashImage, 500);
+
+  });
+  const removeSplashImage = function(){
+    let splashImage = document.querySelector("#splash-screen");
+    splashImage.style.display = 'none';
+  }
+
+
+
 });
