@@ -1,7 +1,16 @@
 @media(min-width: 700px){
+
   #container{
     display: flex;
   }
+
+  /* #pub-view {
+    flex: 50%;
+  }
+
+  #pub-view {
+    flex: 50%;
+  } */
 }
 
 
@@ -81,6 +90,8 @@ h1 {
 
 #pub-view {
   flex: 50%;
+  height: 80vh;
+  width: 100%;
 }
 
 h1 {
