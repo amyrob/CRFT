@@ -15,8 +15,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const pubListContainer = document.querySelector('#pub-list-container');
   const pubDistanceContainer = document.querySelector('#pub-distance-list-container');
   const pubView = new PubView(pubSelect, pubDetailContainer, pubListContainer, pubDistanceContainer);
-
+  const searchBar = document.querySelector('#search-autocomplete');
   const pubData = new PubData('http://localhost:3000/crft/');
+
 
   const pubsArray = [];
   pubData.getData((data) => {
@@ -35,6 +36,12 @@ document.addEventListener('DOMContentLoaded', () => {
               return pubA.distance - pubB.distance;
             });
           });
+        });
+        map.autocomplete(searchBar, (placeResult) => {
+          const lat = placeResult.geometry.location.lat();
+          const lng = placeResult.geometry.location.lng();
+          postition = {lat: lat, lng: lng};
+          map.setCenter(position);
         });
       });
       console.log(pubsArray);

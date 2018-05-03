@@ -109,14 +109,14 @@ MapWrapper.prototype.setCenterThroughGeolocation = function(onComplete) {
   };
 };
 
-MapWrapper.prototype.autocomplete = function(input) {
+MapWrapper.prototype.autocomplete = function(input, callback) {
   const autocomplete = new google.maps.places.Autocomplete(input);
   const places = new google.maps.places.PlacesService(this.googleMap);
   autocomplete.addListener('place_changed', onPlaceChanged);
   function onPlaceChanged() {
     const placeResult = autocomplete.getPlace();
     console.log(placeResult);
-    return placeResult;
+    callback(placeResult);
   };
 };
 
