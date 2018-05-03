@@ -70,7 +70,7 @@ MapWrapper.prototype.getDistance = function(origins, destinations, callback) {
   );
 };
 
-MapWrapper.prototype.setCenterThroughGeolocation = function() {
+MapWrapper.prototype.setCenterThroughGeolocation = function(onComplete) {
   let map = this.googleMap;
   let centerMarker;
   centerMarker = new google.maps.Marker ({
@@ -88,6 +88,9 @@ MapWrapper.prototype.setCenterThroughGeolocation = function() {
       // infoWindow.open(map);
       this.center = pos;
       map.setCenter(pos);
+      onComplete(pos);
+
+
     }, function() {
       handleLocationError(true, map.getCenter());
     })
