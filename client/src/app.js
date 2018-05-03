@@ -59,24 +59,30 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const ayeButton = document.querySelector("#aye");
   ayeButton.addEventListener('click', function (){
+    console.log(window.innerHeight);
     scrollTo({
-      top: 1000,
+      top: window.innerHeight,
       behavior: "smooth"
     });
 
     setTimeout(()=> {const body = document.querySelector("body");
-    body.style.overflow = 'auto';}, 600);
+    body.style.overflow = 'auto';}, 1000);
 
 
     let splashImage = document.querySelector("#splash-screen");
     // splashImage.style.height = '30vh';
-    setTimeout(removeSplashImage, 500);
+    setTimeout(removeSplashImage, 800);
 
   });
   const removeSplashImage = function(){
     let splashImage = document.querySelector("#splash-screen");
     splashImage.style.display = 'none';
   }
+
+  const nawButton = document.querySelector("#naw");
+  nawButton.addEventListener('click', function(){
+    window.location.href="https://www.bbc.co.uk/cbeebies";
+  });
 
 
 
